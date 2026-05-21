@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, Drawer, DrawerContent, useDisclosure } from "@chakra-ui/react";
+import NavBar from "./components/Layout/NavBar";
 
 function App() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box>
+      <NavBar onOpen={onOpen} />
+
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+        <DrawerContent p={6}>
+          <Box>Menu goes here</Box>
+        </DrawerContent>
+      </Drawer>
+
+      <Box p={10}>
+        <h1>Welcome to MediFlow</h1>
+      </Box>
+    </Box>
   );
 }
 
