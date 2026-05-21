@@ -1,45 +1,35 @@
-import { extendTheme } from "@chakra-ui/react";
+import { defineConfig } from "@chakra-ui/react";
 
-const theme = extendTheme({
+const theme = defineConfig({
   colors: {
     brand: {
-      50: "#E6FFFA",
-      100: "#B2F5EA",
-      200: "#81E6D9",
-      300: "#4FD1C5",
-      400: "#38B2AC",
-      500: "#0D9488",
-      600: "#0F766E",
-      700: "#115E59",
-      800: "#134E4A",
-      900: "#0F3F3A",
+      50: "#e3f9f9",
+      100: "#c8eff0",
+      200: "#a0e5e6",
+      300: "#6fd9db",
+      400: "#3ecdd0",
+      500: "#1fb3b6",
+      600: "#148c8f",
+      700: "#0b6669",
+      800: "#034041",
+      900: "#001a1b",
     },
     slate: {
-      50: "#F8FAFC",
-      100: "#F1F5F9",
-      200: "#E2E8F0",
-      300: "#CBD5E1",
-      400: "#94A3B8",
-      500: "#64748B",
+      50: "#f8fafc",
+      100: "#f1f5f9",
+      200: "#e2e8f0",
+      300: "#cbd5e1",
+      400: "#94a3b8",
+      500: "#64748b",
       600: "#475569",
       700: "#334155",
-      800: "#1E293B",
-      900: "#0F172A",
+      800: "#1e293b",
+      900: "#0f172a",
     },
   },
-
   fonts: {
-    heading: "'Inter', sans-serif",
-    body: "'Inter', sans-serif",
-  },
-
-  styles: {
-    global: {
-      body: {
-        bg: "slate.50",
-        color: "slate.900",
-      },
-    },
+    heading: "Inter, sans-serif",
+    body: "Inter, sans-serif",
   },
 });
 
