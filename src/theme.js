@@ -1,6 +1,6 @@
-import { defineConfig } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
 
-const theme = defineConfig({
+const theme = extendTheme({
   colors: {
     brand: {
       50: "#e3f9f9",

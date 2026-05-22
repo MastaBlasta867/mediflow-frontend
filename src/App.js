@@ -1,12 +1,17 @@
 import { Box, Drawer, DrawerContent, Text, useDisclosure } from "@chakra-ui/react";
 import NavBar from "./components/Layout/NavBar";
+import Sidebar from "./components/Layout/Sidebar";
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box>
+      {/* Top Navigation Bar */}
       <NavBar onOpen={onOpen} />
+
+      {/* Desktop Sidebar */}
+      <Sidebar />
 
       {/* Mobile Drawer Menu */}
       <Drawer
@@ -33,8 +38,12 @@ function App() {
         </DrawerContent>
       </Drawer>
 
-      {/* Page Content */}
-      <Box pt="100px" p={10}>
+      {/* Main Page Content */}
+      <Box
+        pt="100px"
+        pl={{ base: "0", md: "260px" }}
+        p={10}
+      >
         <h1>Welcome to MediFlow</h1>
       </Box>
     </Box>
