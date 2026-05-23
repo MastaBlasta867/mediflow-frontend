@@ -1,8 +1,30 @@
+import React from "react";
 import { Box, Flex, HStack, IconButton, Text } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { MdDashboard, MdEventNote, MdPeople } from "react-icons/md";
 
 function NavBar({ onOpen }) {
+  const location = useLocation();
+
+  const links = [
+    {
+      label: "Dashboard",
+      to: "/",
+      icon: <MdDashboard size={20} />,
+    },
+    {
+      label: "Appointments",
+      to: "/appointments",
+      icon: <MdEventNote size={20} />,
+    },
+    {
+      label: "Patients",
+      to: "/patients",
+      icon: <MdPeople size={20} />,
+    },
+  ];
+
   return (
     <Box
       position="fixed"
@@ -55,23 +77,31 @@ function NavBar({ onOpen }) {
           fontWeight="medium"
           color="slate.700"
         >
-          <NavLink to="/" style={{ textDecoration: "none" }}>
-            <Text _hover={{ color: "brand.600" }} cursor="pointer">
-              Dashboard
-            </Text>
-          </NavLink>
+          {links.map((link) => {
+            const isActive = location.pathname === link.to;
 
-          <NavLink to="/appointments" style={{ textDecoration: "none" }}>
-            <Text _hover={{ color: "brand.600" }} cursor="pointer">
-              Appointments
-            </Text>
-          </NavLink>
-
-          <NavLink to="/patients" style={{ textDecoration: "none" }}>
-            <Text _hover={{ color: "brand.600" }} cursor="pointer">
-              Patients
-            </Text>
-          </NavLink>
+            return (
+              <NavLink key={link.to} to={link.to} style={{ textDecoration: "none" }}>
+                <Flex
+                  align="center"
+                  gap={2}
+                  fontWeight={isActive ? "bold" : "medium"}
+                  color={isActive ? "brand.600" : "slate.700"}
+                  borderBottom={isActive ? "2px solid #3182ce" : "2px solid transparent"}
+                  pb="2px"
+                  transition="all 0.25s ease"
+                  _hover={{
+                    color: "brand.600",
+                    borderBottom: "2px solid #63b3ed",
+                  }}
+                  cursor="pointer"
+                >
+                  {link.icon}
+                  {link.label}
+                </Flex>
+              </NavLink>
+            );
+          })}
         </HStack>
       </Flex>
     </Box>
@@ -79,4 +109,3 @@ function NavBar({ onOpen }) {
 }
 
 export default NavBar;
-

@@ -1,4 +1,7 @@
+import React from "react";
 import { Routes, Route } from "react-router-dom";
+
+import MainLayout from "../components/Layout/MainLayout";
 
 // Admin pages
 import AdminDashboard from "../pages/admin/AdminDashboard";
@@ -15,25 +18,140 @@ import PatientDashboard from "../pages/patient/PatientDashboard";
 import MyAppointmentsPatient from "../pages/patient/MyAppointments";
 import Prescriptions from "../pages/patient/Prescriptions";
 
-function AppRoutes() {
+// Auth
+import Login from "../pages/auth/Login";
+
+// Guards
+import ProtectedRoute from "../components/common/ProtectedRoute";
+import RoleGuard from "../components/common/RoleGuard";
+
+export default function AppRoutes() {
   return (
     <Routes>
-      {/* Admin */}
-      <Route path="/" element={<AdminDashboard />} />
-      <Route path="/admin/doctors" element={<ManageDoctors />} />
-      <Route path="/admin/patients" element={<ManagePatients />} />
 
-      {/* Doctor */}
-      <Route path="/doctor" element={<DoctorDashboard />} />
-      <Route path="/doctor/appointments" element={<MyAppointmentsDoctor />} />
-      <Route path="/doctor/patient/:id" element={<PatientDetails />} />
+      {/* Public Route */}
+      <Route path="/login" element={<Login />} />
 
-      {/* Patient */}
-      <Route path="/patient" element={<PatientDashboard />} />
-      <Route path="/patient/appointments" element={<MyAppointmentsPatient />} />
-      <Route path="/patient/prescriptions" element={<Prescriptions />} />
+      {/* Admin Routes */}
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <RoleGuard role="ADMIN">
+              <MainLayout>
+                <AdminDashboard />
+              </MainLayout>
+            </RoleGuard>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/doctors"
+        element={
+          <ProtectedRoute>
+            <RoleGuard role="ADMIN">
+              <MainLayout>
+                <ManageDoctors />
+              </MainLayout>
+            </RoleGuard>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/patients"
+        element={
+          <ProtectedRoute>
+            <RoleGuard role="ADMIN">
+              <MainLayout>
+                <ManagePatients />
+              </MainLayout>
+            </RoleGuard>
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Doctor Routes */}
+      <Route
+        path="/doctor"
+        element={
+          <ProtectedRoute>
+            <RoleGuard role="DOCTOR">
+              <MainLayout>
+                <DoctorDashboard />
+              </MainLayout>
+            </RoleGuard>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/doctor/appointments"
+        element={
+          <ProtectedRoute>
+            <RoleGuard role="DOCTOR">
+              <MainLayout>
+                <MyAppointmentsDoctor />
+              </MainLayout>
+            </RoleGuard>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/doctor/patient/:id"
+        element={
+          <ProtectedRoute>
+            <RoleGuard role="DOCTOR">
+              <MainLayout>
+                <PatientDetails />
+              </MainLayout>
+            </RoleGuard>
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Patient Routes */}
+      <Route
+        path="/patient"
+        element={
+          <ProtectedRoute>
+            <RoleGuard role="PATIENT">
+              <MainLayout>
+                <PatientDashboard />
+              </MainLayout>
+            </RoleGuard>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/patient/appointments"
+        element={
+          <ProtectedRoute>
+            <RoleGuard role="PATIENT">
+              <MainLayout>
+                <MyAppointmentsPatient />
+              </MainLayout>
+            </RoleGuard>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/patient/prescriptions"
+        element={
+          <ProtectedRoute>
+            <RoleGuard role="PATIENT">
+              <MainLayout>
+                <Prescriptions />
+              </MainLayout>
+            </RoleGuard>
+          </ProtectedRoute>
+        }
+      />
+
     </Routes>
   );
 }
-
-export default AppRoutes;
