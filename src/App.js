@@ -1,24 +1,35 @@
-import { ChakraProvider, Box } from "@chakra-ui/react";
-import Sidebar from "./components/Layout/Sidebar";
-import NavBar from "./components/Layout/NavBar";
-import theme from "./theme";
-import AdminDashboard from "./pages/admin/AdminDashboard";
+import { BrowserRouter } from "react-router-dom";
+import { Box, Flex } from "@chakra-ui/react";
+
+import NavBar from "./components/NavBar";
+import Sidebar from "./components/Sidebar";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
-    <ChakraProvider theme={theme}>
-      <Box display="flex">
-        <Sidebar />
+    <BrowserRouter>
+      <Box>
+        {/* Top Navigation */}
+        <NavBar />
 
-        <Box flex="1" bg="slate.50" minH="100vh">
-          <NavBar />
+        <Flex>
+          {/* Sidebar */}
+          <Sidebar />
 
-          <Box pt="100px" pl={{ base: "0", md: "260px" }} p={10}>
-            <AdminDashboard />
+          {/* Main Content */}
+          <Box
+            flex="1"
+            ml={{ base: 0, md: "240px" }}
+            mt="100px"
+            p={8}
+            bg="gray.50"
+            minH="100vh"
+          >
+            <AppRoutes />
           </Box>
-        </Box>
+        </Flex>
       </Box>
-    </ChakraProvider>
+    </BrowserRouter>
   );
 }
 

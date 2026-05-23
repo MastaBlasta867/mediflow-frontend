@@ -1,4 +1,5 @@
 import { Box, VStack, Text } from "@chakra-ui/react";
+import { NavLink } from "react-router-dom";
 
 function Sidebar() {
   return (
@@ -16,15 +17,31 @@ function Sidebar() {
       display={{ base: "none", md: "block" }}
     >
       <VStack align="start" spacing={6} fontWeight="medium" color="slate.700">
-        <Text _hover={{ color: "brand.600" }} cursor="pointer">
-          Dashboard
-        </Text>
-        <Text _hover={{ color: "brand.600" }} cursor="pointer">
-          Appointments
-        </Text>
-        <Text _hover={{ color: "brand.600" }} cursor="pointer">
-          Patients
-        </Text>
+        
+        <NavLink to="/" style={{ textDecoration: "none", width: "100%" }}>
+          <Text _hover={{ color: "brand.600" }} cursor="pointer">
+            Dashboard
+          </Text>
+        </NavLink>
+
+        <NavLink
+          to="/appointments"
+          style={{ textDecoration: "none", width: "100%" }}
+        >
+          <Text _hover={{ color: "brand.600" }} cursor="pointer">
+            Appointments
+          </Text>
+        </NavLink>
+
+        <NavLink
+          to="/patients"
+          style={{ textDecoration: "none", width: "100%" }}
+        >
+          <Text _hover={{ color: "brand.600" }} cursor="pointer">
+            Patients
+          </Text>
+        </NavLink>
+
       </VStack>
     </Box>
   );

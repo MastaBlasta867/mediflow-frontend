@@ -1,5 +1,6 @@
 import { Box, Flex, HStack, IconButton, Text } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import { NavLink } from "react-router-dom";
 
 function NavBar({ onOpen }) {
   return (
@@ -54,15 +55,23 @@ function NavBar({ onOpen }) {
           fontWeight="medium"
           color="slate.700"
         >
-          <Text _hover={{ color: "brand.600" }} cursor="pointer">
-            Dashboard
-          </Text>
-          <Text _hover={{ color: "brand.600" }} cursor="pointer">
-            Appointments
-          </Text>
-          <Text _hover={{ color: "brand.600" }} cursor="pointer">
-            Patients
-          </Text>
+          <NavLink to="/" style={{ textDecoration: "none" }}>
+            <Text _hover={{ color: "brand.600" }} cursor="pointer">
+              Dashboard
+            </Text>
+          </NavLink>
+
+          <NavLink to="/appointments" style={{ textDecoration: "none" }}>
+            <Text _hover={{ color: "brand.600" }} cursor="pointer">
+              Appointments
+            </Text>
+          </NavLink>
+
+          <NavLink to="/patients" style={{ textDecoration: "none" }}>
+            <Text _hover={{ color: "brand.600" }} cursor="pointer">
+              Patients
+            </Text>
+          </NavLink>
         </HStack>
       </Flex>
     </Box>
@@ -70,3 +79,4 @@ function NavBar({ onOpen }) {
 }
 
 export default NavBar;
+
