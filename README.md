@@ -1,70 +1,223 @@
-# Getting Started with Create React App
+<p align="center">
+<img src="https://dummyimage.com/1200x250/0d1117/ffffff&text=MediFlow+Clinic+Frontend+%7C+Enterprise+Healthcare+Management+UI" alt="MediFlow Clinic Frontend Banner">
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+MediFlow Clinic Frontend — Enterprise Healthcare Management UI
+A modern, cloud‑ready frontend built with React, Chakra UI, React Router, and Context API.
+Designed to deliver a secure, responsive, enterprise‑grade user interface for Admin, Doctor, and Patient users while integrating seamlessly with the MediFlow backend.
 
-## Available Scripts
+Table of Contents
+Overview
 
-In the project directory, you can run:
+Features
 
-### `npm start`
+Architecture
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+System Modules
 
-### `npm test`
+UI Layout Design
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Security
 
-### `npm run build`
+API Integration
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Screenshots
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Running the Project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Docker Support
 
-### `npm run eject`
+CI/CD Pipeline
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Future Enhancements
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Author
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Overview
+The MediFlow Clinic Frontend is a modern single‑page application (SPA) designed to streamline clinic operations through a clean, role‑based interface.
+It supports patient onboarding, doctor management, appointment scheduling, and prescription viewing through dynamic dashboards and secure JWT authentication.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Although developed as part of a full‑stack system, the frontend follows real‑world UI engineering patterns to demonstrate professional React development suitable for enterprise environments.
 
-## Learn More
+Features
+Admin
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Manage doctors
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Manage patients
 
-### Code Splitting
+View system‑wide metrics
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Doctor
 
-### Analyzing the Bundle Size
+View upcoming appointments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Access patient details
 
-### Making a Progressive Web App
+Manage prescriptions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Patient
 
-### Advanced Configuration
+Search doctors
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Book appointments
 
-### Deployment
+View personal medical history
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+UI/UX
 
-### `npm run build` fails to minify
+Responsive Chakra UI components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Dynamic Sidebar & Navbar
+
+Role‑aware navigation
+
+Security
+
+JWT‑based authentication
+
+Protected routes
+
+Role‑based authorization
+
+Architecture
+The frontend follows a modular, component‑driven architecture:
+
+1. Presentation Layer
+
+React components
+
+Chakra UI styling
+
+Responsive layout system
+
+2. Application Layer
+
+React Router for navigation
+
+Context API for authentication state
+
+ProtectedRoute & RoleGuard for access control
+
+3. Integration Layer
+
+Fetch API for backend communication
+
+Token‑based authentication
+
+Role‑based redirects
+
+High‑Level Flow
+
+User logs in
+
+Backend returns JWT + role
+
+AuthContext stores session
+
+ProtectedRoute validates access
+
+RoleGuard routes user to correct dashboard
+
+UI updates dynamically
+
+Tech Stack
+Frontend
+
+React 18
+
+React Router v6
+
+Chakra UI
+
+Context API
+
+Fetch API
+
+Build Tools
+
+Node.js
+
+Vite or Create React App
+
+DevOps
+
+Docker
+
+GitHub Actions (CI pipeline)
+
+System Modules
+Module	Description
+Admin	Manage doctors, patients, and system settings
+Doctor	View appointments, manage prescriptions
+Patient	Book appointments, view medical history
+Auth	Login, JWT handling, role management
+Layout	Sidebar, Navbar, MainLayout
+
+
+UI Layout Design
+Core Components
+
+MainLayout — global layout wrapper
+
+Sidebar — dynamic role‑based navigation
+
+NavBar — top navigation with user info
+
+AppRoutes — centralized routing
+
+Pages
+
+/ — Admin Dashboard
+
+/doctor — Doctor Dashboard
+
+/patient — Patient Dashboard
+
+Security
+The frontend uses:
+
+JWT authentication (via backend)
+
+Role‑based access control
+
+Protected routes
+
+Secure redirects
+
+Roles include:
+
+ADMIN
+
+DOCTOR
+
+PATIENT
+
+API Integration
+Auth APIs
+
+Code
+POST /api/auth/login
+POST /api/auth/register
+Doctor APIs
+
+Code
+GET /api/doctors
+GET /api/doctors/{id}
+POST /api/doctors
+Appointment APIs
+
+Code
+GET /api/appointments/patient/{id}
+POST /api/appointments
+The frontend communicates with the backend using the Fetch API and stores the JWT token in memory via Context API.
+
+Screenshots
+(Add screenshots here once generated.)
+
+👤 Author
+Pomolefe (MastaBlasta867)  
+📧 pomolefe1986@gmail.com
+Distributed AI Engineer (in progress)
