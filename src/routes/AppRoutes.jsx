@@ -37,7 +37,7 @@ export default function AppRoutes() {
         path="/"
         element={
           <ProtectedRoute>
-            <RoleGuard role="ADMIN">
+            <RoleGuard allowedRoles={["ADMIN"]}>
               <MainLayout>
                 <AdminDashboard />
               </MainLayout>
@@ -50,7 +50,7 @@ export default function AppRoutes() {
         path="/admin/doctors"
         element={
           <ProtectedRoute>
-            <RoleGuard role="ADMIN">
+            <RoleGuard allowedRoles={["ADMIN"]}>
               <MainLayout>
                 <ManageDoctors />
               </MainLayout>
@@ -63,7 +63,7 @@ export default function AppRoutes() {
         path="/admin/patients"
         element={
           <ProtectedRoute>
-            <RoleGuard role="ADMIN">
+            <RoleGuard allowedRoles={["ADMIN"]}>
               <MainLayout>
                 <ManagePatients />
               </MainLayout>
@@ -77,7 +77,7 @@ export default function AppRoutes() {
         path="/doctor"
         element={
           <ProtectedRoute>
-            <RoleGuard role="DOCTOR">
+            <RoleGuard allowedRoles={["DOCTOR"]}>
               <MainLayout>
                 <DoctorDashboard />
               </MainLayout>
@@ -90,7 +90,7 @@ export default function AppRoutes() {
         path="/doctor/appointments"
         element={
           <ProtectedRoute>
-            <RoleGuard role="DOCTOR">
+            <RoleGuard allowedRoles={["DOCTOR"]}>
               <MainLayout>
                 <MyAppointmentsDoctor />
               </MainLayout>
@@ -103,7 +103,7 @@ export default function AppRoutes() {
         path="/doctor/patient/:id"
         element={
           <ProtectedRoute>
-            <RoleGuard role="DOCTOR">
+            <RoleGuard allowedRoles={["DOCTOR"]}>
               <MainLayout>
                 <PatientDetails />
               </MainLayout>
@@ -117,7 +117,7 @@ export default function AppRoutes() {
         path="/patient"
         element={
           <ProtectedRoute>
-            <RoleGuard role="PATIENT">
+            <RoleGuard allowedRoles={["PATIENT"]}>
               <MainLayout>
                 <PatientDashboard />
               </MainLayout>
@@ -130,7 +130,7 @@ export default function AppRoutes() {
         path="/patient/appointments"
         element={
           <ProtectedRoute>
-            <RoleGuard role="PATIENT">
+            <RoleGuard allowedRoles={["PATIENT"]}>
               <MainLayout>
                 <MyAppointmentsPatient />
               </MainLayout>
@@ -143,7 +143,7 @@ export default function AppRoutes() {
         path="/patient/prescriptions"
         element={
           <ProtectedRoute>
-            <RoleGuard role="PATIENT">
+            <RoleGuard allowedRoles={["PATIENT"]}>
               <MainLayout>
                 <Prescriptions />
               </MainLayout>

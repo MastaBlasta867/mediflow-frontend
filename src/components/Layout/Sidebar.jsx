@@ -1,50 +1,65 @@
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Box, VStack, Text } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
-function Sidebar() {
+export default function Sidebar() {
+  const { user } = useAuth();
+  const location = useLocation();
+
+  // Role-based menu configuration
+  const menuItems = {
+    ADMIN: [
+      { label: "Dashboard", path: "/" },
+      { label: "Manage Doctors", path: "/admin/doctors" },
+      { label: "Manage Patients", path: "/admin/patients" },
+    ],
+
+    DOCTOR: [
+      { label: "Dashboard", path: "/doctor" },
+      { label: "My Appointments", path: "/doctor/appointments" },
+    ],
+
+    PATIENT: [
+      { label: "Dashboard", path: "/patient" },
+      { label: "My Appointments", path: "/patient/appointments" },
+      { label: "Prescriptions", path: "/patient/prescriptions" },
+    ],
+  };
+
+  // If no user yet, show nothing
+  if (!user || !user.role) return null;
+
   return (
     <Box
+      w="250px"
+      bg="gray.900"
+      color="white"
+      minH="100vh"
+      p={5}
       position="fixed"
-      left="0"
-      top="0"
-      h="100vh"
-      w="240px"
-      bg="white"
-      borderRight="1px solid rgba(0,0,0,0.1)"
-      boxShadow="0 4px 20px rgba(0,0,0,0.05)"
-      pt="100px"
-      px={6}
-      display={{ base: "none", md: "block" }}
+      left={0}
+      top={0}
     >
-      <VStack align="start" spacing={6} fontWeight="medium" color="slate.700">
-        
-        <NavLink to="/" style={{ textDecoration: "none", width: "100%" }}>
-          <Text _hover={{ color: "brand.600" }} cursor="pointer">
-            Dashboard
-          </Text>
-        </NavLink>
+      <Text fontSize="2xl" fontWeight="bold" mb={8}>
+        MediFlow Clinic
+      </Text>
 
-        <NavLink
-          to="/appointments"
-          style={{ textDecoration: "none", width: "100%" }}
-        >
-          <Text _hover={{ color: "brand.600" }} cursor="pointer">
-            Appointments
-          </Text>
-        </NavLink>
-
-        <NavLink
-          to="/patients"
-          style={{ textDecoration: "none", width: "100%" }}
-        >
-          <Text _hover={{ color: "brand.600" }} cursor="pointer">
-            Patients
-          </Text>
-        </NavLink>
-
+      <VStack align="stretch" spacing={4}>
+        {menuItems[user.role].map((item) => (
+          <Box
+            key={item.path}
+            as={Link}
+            to={item.path}
+            p={3}
+            borderRadius="md"
+            bg={location.pathname === item.path ? "blue.600" : "gray.700"}
+            _hover={{ bg: "blue.500" }}
+          >
+            {item.label}
+          </Box>
+        ))}
       </VStack>
     </Box>
   );
 }
-
-export default Sidebar;
