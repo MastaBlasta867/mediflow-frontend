@@ -1,68 +1,97 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { Box, Button, Input, VStack, Text } from "@chakra-ui/react";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { setUser } = useAuth();
+  const [error, setError] = useState("");
+
+  const { login, role } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
-      });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-      if (!response.ok) {
-        alert("Invalid credentials");
-        return;
-      }
+    const success = await login(username, password);
 
-      const data = await response.json();
-
-      // data MUST contain: token + role
-      setUser({
-        token: data.token,
-        role: data.role
-      });
-
-      // redirect based on role
-      if (data.role === "ADMIN") navigate("/");
-      if (data.role === "DOCTOR") navigate("/doctor");
-      if (data.role === "PATIENT") navigate("/patient");
-
-    } catch (err) {
-      console.error(err);
-      alert("Login failed");
+    if (!success) {
+      setError("Invalid username or password");
+      return;
     }
+
+    if (role === "ADMIN") navigate("/");
+    if (role === "DOCTOR") navigate("/doctor");
+    if (role === "PATIENT") navigate("/patient");
   };
 
   return (
-    <Box maxW="400px" mx="auto" mt="120px" p={8} bg="white" borderRadius="md" boxShadow="md">
-      <VStack spacing={4}>
-        <Text fontSize="2xl" fontWeight="bold">MediFlow Login</Text>
+    <div
+      style={{
+        maxWidth: "400px",
+        margin: "0 auto",
+        marginTop: "150px",
+        padding: "30px",
+        background: "white",
+        borderRadius: "8px",
+        boxShadow: "0 0 10px rgba(0,0,0,0.1)"
+      }}
+    >
+      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
+        MediFlow Login
+      </h2>
 
-        <Input
+      {error && (
+        <p style={{ color: "red", textAlign: "center" }}>{error}</p>
+      )}
+
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "12px",
+            marginBottom: "15px",
+            borderRadius: "6px",
+            border: "1px solid #ddd",
+            fontSize: "16px"
+          }}
         />
 
-        <Input
-          placeholder="Password"
+        <input
           type="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "12px",
+            marginBottom: "15px",
+            borderRadius: "6px",
+            border: "1px solid #ddd",
+            fontSize: "16px"
+          }}
         />
 
-        <Button colorScheme="blue" width="100%" onClick={handleLogin}>
+        <button
+          type="submit"
+          style={{
+            width: "100%",
+            padding: "12px",
+            backgroundColor: "#2B6CB0",
+            color: "white",
+            border: "none",
+            borderRadius: "6px",
+            fontSize: "16px",
+            cursor: "pointer"
+          }}
+        >
           Login
-        </Button>
-      </VStack>
-    </Box>
+        </button>
+      </form>
+    </div>
   );
 }
